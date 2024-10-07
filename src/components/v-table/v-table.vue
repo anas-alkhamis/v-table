@@ -1,65 +1,52 @@
-<script setup lang="ts">
-import { ref, defineProps } from "vue";
-import { Columns, createTable } from "./tableConfig";
-
-const props = defineProps<{
-  columns: Columns;
-  data: Array<Record<string, any>>;
-  translations: Record<string, any>;
-}>();
-
-// Create table utilities
-const { getHeaders, getColumns, getCellContext } = createTable({
-  columns: props.columns,
-  data: props.data,
-  translations: props.translations,
-  lang: "en",
-});
-
-const headers = ref(getHeaders());
-const tableData = ref(getColumns());
-</script>
-
 <template>
-  <div class="card p-3">
-    <table class="table">
-      <caption>
-        Sample Data Table
-      </caption>
-      <thead class="border-bottom">
-        <tr>
+  <div class="w-100">
+    <table>
+      <thead>
+        <tr class="border-bottom">
           <th
-            class="p-2 text-sm font-weight-bold text-uppercase"
+            class="p-2 text-uppercase"
             style="font-size: 14px"
-            v-for="(item, index) in headers"
-            :key="index"
+            v-for="item in props.schema.columns"
           >
-            <span v-if="typeof item === 'string'"> {{ item }}</span>
-            <component v-else :is="item" v-slot:default />
+            <slot v-if="item.displaySlot" :name="item.displaySlot" :item="item">
+            </slot>
+            <span v-else>
+              {{ item.displayName }}
+            </span>
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr
-          class="border-bottom"
-          v-for="(row, rowIndex) in tableData"
-          :key="rowIndex"
-        >
+        <tr class="border-bottom" v-for="item in paginatedTableData">
           <td
-            class="p-2 text-sm-left"
-            v-for="(column, colIndex) in props.columns"
-            :key="colIndex"
+            class="p-2"
+            style="font-size: 14px"
+            v-for="col in props.schema.columns"
           >
-            <component
-              v-if="column.cell"
-              :is="column.cell"
-              :row="row"
-              v-slot:default
-            />
-            <span v-else>{{ getCellContext(colIndex, row) }}</span>
+            <slot v-if="col.slotName" :name="col.slotName" :item="item"> </slot>
+            <span v-else>{{ resolveByPath(item, col.name) }}</span>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
 </template>
+
+<script setup lang="ts">
+import { computed, defineProps } from "vue";
+import { ISchema } from "../../meta/i-table";
+import { resolveByPath } from "../../utils/resolveByPath";
+
+const props = defineProps<{
+  schema: ISchema;
+  data: { [key: string]: any }[];
+  currentPage: number;
+  rowsPerPage: number;
+}>();
+
+const paginatedTableData = computed(() => {
+  const start = (props.currentPage - 1) * props.rowsPerPage;
+  const end = start + props.rowsPerPage;
+  return props.data.slice(start, end);
+});
+</script>

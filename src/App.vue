@@ -1,11 +1,4 @@
 <template>
-  <!-- <div>
-    <v-table :schema="schema1" :data="data1">
-      <template #action="{ item }">
-        <button class="btn btn-primar">click me {{ item.car_make }}</button>
-      </template>
-    </v-table>
-  </div> -->
   <div class="card p-3 overflow-auto m-auto mt-5" style="width: 96%">
     <v-table-header
       :label="`Showing  ${(currentPage - 1) * rowsPerPage || 1} to ${
@@ -36,24 +29,9 @@
       :withInput="true"
     ></v-pagination>
   </div>
-  <div class="card p-3 overflow-auto m-auto mt-5" style="width: 96%">
-    <v-table-header
-      :label="`Showing  ${(currentPage - 1) * rowsPerPage || 1} to ${
-        currentPage * rowsPerPage
-      }  of ${data3.length} entity`"
-    ></v-table-header>
-    <v-table
-      :schema="schema3"
-      :data="data3"
-      :currentPage="currentPage"
-      :rowsPerPage="rowsPerPage"
-    ></v-table>
-  </div>
 </template>
 <script setup lang="ts">
 import data1 from "./assets/MOCK_DATA(1).json";
-import data2 from "./assets/MOCK_NESTED_DATA.json";
-import data3 from "./assets/MOCK_DATA.json";
 import { defineAsyncComponent, ref } from "vue";
 import { ISchema } from "./meta/i-table";
 

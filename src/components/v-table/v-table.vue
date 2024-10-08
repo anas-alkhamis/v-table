@@ -1,6 +1,6 @@
 <template>
   <div class="w-100">
-    <table>
+    <table class="w-100">
       <thead>
         <tr class="border-bottom">
           <th
@@ -34,15 +34,10 @@
 
 <script setup lang="ts">
 import { computed, defineProps } from "vue";
-import { ISchema } from "../../meta/i-table";
+import { ITableProps } from "../../meta/i-table";
 import { resolveByPath } from "../../utils/resolveByPath";
 
-const props = defineProps<{
-  schema: ISchema;
-  data: { [key: string]: any }[];
-  currentPage: number;
-  rowsPerPage: number;
-}>();
+const props = defineProps<ITableProps>();
 
 const paginatedTableData = computed(() => {
   const start = (props.currentPage - 1) * props.rowsPerPage;

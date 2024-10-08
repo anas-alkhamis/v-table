@@ -6,9 +6,9 @@
       </template>
     </v-table>
   </div> -->
-  <div class="card p-3 m-3 overflow-auto container" style="width: fit-content">
+  <div class="card p-3 overflow-auto m-auto mt-5" style="width: 96%">
     <v-table-header
-      :label="`Showing  ${(currentPage - 1 || 1) * rowsPerPage} to ${
+      :label="`Showing  ${(currentPage - 1) * rowsPerPage || 1} to ${
         currentPage * rowsPerPage
       }  of ${data1.length} entity`"
     ></v-table-header>
@@ -18,8 +18,13 @@
       :currentPage="currentPage"
       :rowsPerPage="rowsPerPage"
     >
-      <template #action="{ item }">
-        <button class="btn btn-primary">click me {{ item.car_make }}</button>
+      <template #action>
+        <v-icon-button icon="bi bi-trash"></v-icon-button>
+        <v-icon-button icon="bi bi-pencil"></v-icon-button>
+      </template>
+      <template #car="{ item }">
+        <v-icon-button icon="bi bi-car-front"></v-icon-button>
+        {{ item.car_make }}
       </template>
       <template #checkbox="{ item }"> <v-checkbox :item="item" /> </template>
     </v-table>
@@ -28,15 +33,22 @@
       :rowsPerPage="rowsPerPage"
       :totalRows="data1.length"
       @update="changePage"
+      :withInput="true"
     ></v-pagination>
   </div>
-  <!-- <div>
+  <div class="card p-3 overflow-auto m-auto mt-5" style="width: 96%">
+    <v-table-header
+      :label="`Showing  ${(currentPage - 1) * rowsPerPage || 1} to ${
+        currentPage * rowsPerPage
+      }  of ${data3.length} entity`"
+    ></v-table-header>
     <v-table
       :schema="schema3"
       :data="data3"
       :currentPage="currentPage"
+      :rowsPerPage="rowsPerPage"
     ></v-table>
-  </div> -->
+  </div>
 </template>
 <script setup lang="ts">
 import data1 from "./assets/MOCK_DATA(1).json";
@@ -65,6 +77,7 @@ const schema1: ISchema = {
     {
       name: "car_make",
       displayName: "Car Make",
+      slotName: "car",
     },
     {
       name: "car_model_year",
@@ -169,5 +182,8 @@ const VTableHeader = defineAsyncComponent(
 );
 const VCheckbox = defineAsyncComponent(
   () => import("./components/v-checkbox/v-checkbox.vue")
+);
+const VIconButton = defineAsyncComponent(
+  () => import("./components/v-icon-button/v-icon-button.vue")
 );
 </script>

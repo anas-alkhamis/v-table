@@ -30,6 +30,7 @@
       >
     </button>
     <input
+      v-if="withInput"
       class="small form-control w-auto"
       v-model="modelValue"
       type="number"
@@ -38,21 +39,19 @@
 </template>
 <script setup lang="ts">
 import { computed, defineProps, defineEmits, ComputedRef } from "vue";
+import { IPaginationProps } from "../../meta/i-pagination";
 const emit = defineEmits(["update"]);
-const props = defineProps<{
-  rowsPerPage: number;
-  totalRows: number;
-}>();
+const props = defineProps<IPaginationProps>();
+const { totalRows, rowsPerPage, withInput } = props;
 const modelValue: any = defineModel();
 const totalPages: ComputedRef<number> = computed(() =>
-  Math.ceil(props.totalRows / props.rowsPerPage)
+  Math.ceil(totalRows / rowsPerPage)
 );
 
 const visiblePages = computed(() => {
   const pages: number[] = [];
   const startPage = Math.max(1, modelValue.value - 1); //3
-  const endPage = Math.min(totalPages.value, modelValue.value + 1); //5
-  // [3,4,5]
+  const endPage = Math.min(totalPages.value, modelValue.value + 1);
   for (let i: number = startPage; i <= endPage; i++) {
     pages.push(i);
   }

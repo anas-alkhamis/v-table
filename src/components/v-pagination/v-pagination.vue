@@ -38,15 +38,21 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, defineProps, defineEmits, ComputedRef } from "vue";
+import { computed, defineProps, defineEmits, ComputedRef, toRefs } from "vue";
 import { IPaginationProps } from "../../meta/i-pagination";
 const emit = defineEmits(["update"]);
 const props = defineProps<IPaginationProps>();
-const { totalRows, rowsPerPage, withInput } = props;
+const { totalRows, rowsPerPage, withInput } = toRefs(props);
 const modelValue: any = defineModel();
 const totalPages: ComputedRef<number> = computed(() =>
-  Math.ceil(totalRows / rowsPerPage)
+  Math.ceil(totalRows.value / rowsPerPage.value)
 );
+
+const changePage = (page: number) => {
+  if (page >= 1 && page <= totalPages.value) {
+    emit("update", page);
+  }
+};
 
 const visiblePages = computed(() => {
   const pages: number[] = [];
@@ -58,12 +64,6 @@ const visiblePages = computed(() => {
 
   return pages;
 });
-
-const changePage = (page: number) => {
-  if (page >= 1 && page <= totalPages.value) {
-    emit("update", page);
-  }
-};
 </script>
 
 <style>

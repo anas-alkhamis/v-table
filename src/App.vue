@@ -3,7 +3,9 @@
     <v-search v-model="searchValue"></v-search>
     <v-table-header
       :label="`Showing  ${(currentPage - 1) * rowsPerPage + 1} to ${
-        currentPage * rowsPerPage
+        totalRows < currentPage * rowsPerPage
+          ? totalRows
+          : currentPage * rowsPerPage
       }  of ${totalRows} entity`"
     ></v-table-header>
     <v-table
@@ -23,6 +25,7 @@
       <template #checkbox="{ item }"> <v-checkbox :item="item" /> </template>
     </v-table>
     <v-pagination
+      v-if="totalRows > rowsPerPage"
       v-model="currentPage"
       :rowsPerPage="rowsPerPage"
       :totalRows="totalRows"

@@ -1,13 +1,14 @@
 <template>
   <div class="card p-3 overflow-auto m-auto mt-5" style="width: 96%">
+    <v-search v-model="searchValue"></v-search>
     <v-table-header
-      :label="`Showing  ${(currentPage - 1) * rowsPerPage || 1} to ${
+      :label="`Showing  ${(currentPage - 1) * rowsPerPage + 1} to ${
         currentPage * rowsPerPage
-      }  of ${data1.length} entity`"
+      }  of ${totalRows} entity`"
     ></v-table-header>
     <v-table
       :schema="schema1"
-      :data="data1"
+      :data="dataTable"
       :currentPage="currentPage"
       :rowsPerPage="rowsPerPage"
     >
@@ -24,7 +25,7 @@
     <v-pagination
       v-model="currentPage"
       :rowsPerPage="rowsPerPage"
-      :totalRows="data1.length"
+      :totalRows="totalRows"
       @update="changePage"
       :withInput="true"
     ></v-pagination>
@@ -32,15 +33,17 @@
 </template>
 <script setup lang="ts">
 import data1 from "./assets/MOCK_DATA(1).json";
-import { defineAsyncComponent, ref } from "vue";
+import { defineAsyncComponent, ref, watch } from "vue";
 import { ISchema } from "./meta/i-table";
 
 const currentPage = ref(1);
+const searchValue = ref("");
+const dataTable = ref<{ [key: string]: string }[]>(data1);
 const rowsPerPage = 10;
-const changePage = (page: number) => {
-  currentPage.value = page;
-};
+const totalRows = ref(dataTable.value.length);
+
 const schema1: ISchema = {
+  searchableColumns: ["car_make", "car_model_year"],
   columns: [
     {
       name: "checkbox",
@@ -73,6 +76,7 @@ const schema1: ISchema = {
   ],
 };
 const schema2: ISchema = {
+  searchableColumns: [],
   columns: [
     {
       name: "id",
@@ -148,7 +152,24 @@ const schema3: ISchema = {
     },
   ],
 };
+const changePage = (page: number) => {
+  currentPage.value = page;
+};
 
+watch(searchValue, (to: string) => {
+  if (!to?.trim().length || !schema1?.searchableColumns?.length) {
+    dataTable.value = data1;
+    totalRows.value = dataTable.value.length;
+  } else {
+    dataTable.value = data1.filter((item: { [key: string]: string }) => {
+      const found = schema1?.searchableColumns?.find((searchKey: string) =>
+        item[searchKey].toLowerCase().includes(to?.toLowerCase())
+      );
+      return found;
+    });
+    totalRows.value = dataTable.value.length;
+  }
+});
 const VTable = defineAsyncComponent(
   () => import("./components/v-table/v-table.vue")
 );
@@ -163,5 +184,8 @@ const VCheckbox = defineAsyncComponent(
 );
 const VIconButton = defineAsyncComponent(
   () => import("./components/v-icon-button/v-icon-button.vue")
+);
+const VSearch = defineAsyncComponent(
+  () => import("./components/v-search/v-search.vue")
 );
 </script>

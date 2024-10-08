@@ -6,7 +6,7 @@ export type ColumnSchemaType = {
   //sortable
 };
 export interface ISchema {
-  // search filtre
+  searchableColumns?: string[];
   columns: ColumnSchemaType[];
 }
 

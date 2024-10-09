@@ -68,7 +68,7 @@ const item = {
   avatar:
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&s",
   labelColor: "primary",
-  description: "This is a primary list group item",
+  description: "This is a primary list group item This is a primary list group item",
   sub_description: "This is a primary list group item",
 };
 const schema1: ISchema = {

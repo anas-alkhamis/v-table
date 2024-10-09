@@ -1,14 +1,17 @@
 <template>
-  <div class="container border-1 border-bottom px-0 m-0">
+  <div
+    class="container d-flex border-5 border-start"
+    :class="
+      props.item.labelColor ? `border-${props.item.labelColor}` : 'border-white'
+    "
+  >
+    <div style="max-width: 60px; max-height: 60px">
+      <slot name="icon" :item="props.item"> </slot>
+    </div>
     <div
-      class="d-flex gap-3 align-items-center border-5 border-start px-3"
-      :class="
-        props.item.labelColor
-          ? `border-${props.item.labelColor}`
-          : 'border-white'
-      "
+      class="d-flex flex-fill gap-3 align-items-center px-3 border-1 border-bottom border-light-subtle"
     >
-      <div style="width: 60px; height: 60px">
+      <div style="max-width: 60px; max-height: 60px">
         <slot name="avatar" :item="props.item"> </slot>
       </div>
       <div class="flex-fill">

@@ -26,12 +26,18 @@
         class="mx-3"
         style="max-width: 60px; max-height: 60px"
       >
-        <slot name="avatar" :item="props?.item"> </slot>
+        <slot name="avatar" :item="props?.item">
+          <img class="rounded-circle" width="100%" :src="props.item.avatar" />
+        </slot>
       </div>
       <div class="flex-fill">
         <p class="m-0 fw-semibold">{{ props?.item?.title }}</p>
-        <slot name="description" :item="props?.item"> </slot>
-        <slot name="sub-description" :item="props?.item"> </slot>
+        <slot name="description" :item="props?.item"
+          >{{ props.item.description }}
+        </slot>
+        <slot name="sub-description" :item="props?.item">
+          {{ props.item.sub_description }}</slot
+        >
       </div>
 
       <div
@@ -39,7 +45,8 @@
         class="rounded-circle mx-3"
         style="width: 20px; height: 20px"
       >
-        <slot name="action" :item="props?.item"> </slot>
+        <slot name="action" :item="props?.item"
+        </slot>
       </div>
     </div>
   </div>

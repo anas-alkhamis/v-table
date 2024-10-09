@@ -41,17 +41,12 @@
         <v-list-group :item="item">
           <template #list-item="{ item }">
             <v-list-item :item="item">
-              <template #avatar="{ item }">
-                <img class="rounded-circle" width="100%" :src="item.avatar" />
-              </template>
-              <template #description="{ item }">
-                <p class="m-0 fs-6 fw-lighter">{{ item.description }}</p>
-              </template>
-              <template #sub-description="{ item }">
-                <p class="m-0 fs-6 fw-lighter">{{ item.sub_description }}</p>
-              </template>
-              <template #action>
-                <v-checkbox></v-checkbox>
+              <template #action="{ item }">
+                <component
+                  v-if="item?.action_type"
+                  :item="item"
+                  :is="listItemActions[item?.action_type]"
+                ></component>
               </template>
             </v-list-item>
           </template>
@@ -63,8 +58,9 @@
 <script setup lang="ts">
 import data1 from "./assets/MOCK_DATA(1).json";
 import listGroup from "./assets/MOCK_DATA_LIST_VIEW.json";
+import { ListItemAction } from "./meta/list-item-action";
 import { schema1 } from "./schema/table-schema";
-import { defineAsyncComponent, ref, watch } from "vue";
+import { ComponentOptionsMixin, defineAsyncComponent, ref, watch } from "vue";
 
 const currentPage = ref(1);
 const searchValue = ref("");
@@ -101,6 +97,9 @@ const VTableHeader = defineAsyncComponent(
 const VCheckbox = defineAsyncComponent(
   () => import("./components/v-checkbox/v-checkbox.vue")
 );
+const VRadio = defineAsyncComponent(
+  () => import("./components/v-radio/v-radio.vue")
+);
 const VIconButton = defineAsyncComponent(
   () => import("./components/v-icon-button/v-icon-button.vue")
 );
@@ -116,4 +115,8 @@ const VListGroup = defineAsyncComponent(
 const VListView = defineAsyncComponent(
   () => import("./components/v-list-view/v-list-view.vue")
 );
+const listItemActions: { [key: string]: ComponentOptionsMixin } = {
+  [ListItemAction.VCheckbox]: VCheckbox,
+  [ListItemAction.VCRadio]: VRadio,
+};
 </script>

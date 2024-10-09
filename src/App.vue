@@ -33,6 +33,22 @@
       :withInput="true"
     ></v-pagination>
   </div>
+  <!-- V List  Item start -->
+  <v-list-item :item="item">
+    <template #avatar="{ item }">
+      <img class="rounded-circle" width="100%" :src="item.avatar" />
+    </template>
+    <template #description="{ item }">
+      <p class="m-0 small">{{ item.description }}</p>
+    </template>
+    <template #sub-description="{ item }">
+      <p class="m-0 small">{{ item.sub_description }}</p>
+    </template>
+    <template #action="{ item }">
+      <img class="w-100 h-100" :src="item.actionIcon" alt="" />
+    </template>
+  </v-list-item>
+  <!-- V List  Item end -->
 </template>
 <script setup lang="ts">
 import data1 from "./assets/MOCK_DATA(1).json";
@@ -44,7 +60,17 @@ const searchValue = ref("");
 const dataTable = ref<{ [key: string]: string }[]>(data1);
 const rowsPerPage = 10;
 const totalRows = ref(dataTable.value.length);
-
+// v-list-item data
+const item = {
+  title: "This is a primary list group item",
+  actionIcon:
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&s",
+  avatar:
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&s",
+  labelColor: "primary",
+  description: "This is a primary list group item",
+  sub_description: "This is a primary list group item",
+};
 const schema1: ISchema = {
   searchableColumns: ["car_make", "car_model_year"],
   columns: [
@@ -158,7 +184,6 @@ const schema3: ISchema = {
 const changePage = (page: number) => {
   currentPage.value = page;
 };
-
 watch(searchValue, (to: string) => {
   if (!to?.trim().length || !schema1?.searchableColumns?.length) {
     dataTable.value = data1;
@@ -190,5 +215,8 @@ const VIconButton = defineAsyncComponent(
 );
 const VSearch = defineAsyncComponent(
   () => import("./components/v-search/v-search.vue")
+);
+const VListItem = defineAsyncComponent(
+  () => import("./components/v-list-item/v-list-item.vue")
 );
 </script>

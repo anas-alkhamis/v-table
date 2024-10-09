@@ -9,6 +9,6 @@
 import { defineProps } from "vue";
 
 const props = defineProps<{
-  item: any;
+  item?: any;
 }>();
 </script>

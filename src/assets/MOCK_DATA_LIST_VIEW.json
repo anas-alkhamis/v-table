@@ -5,21 +5,21 @@
       {
         "title": "This is a primary list group item",
         "action": true,
-        "avatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&s",
-        "icon": "bi-car-front",
-        "labelColor": "primary",
-        "description": "This is a primary list group item This is a primary list group item",
-        "sub_description": "This is a primary list group item"
-      },
-      {
-        "title": "This is a primary list group item",
-        "action": true,
-        "avatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&s",
         "icon": "bi-car-front",
         "labelColor": "primary",
         "description": "This is a primary list group item This is a primary list group item",
         "sub_description": "This is a primary list group item",
-        "disabled": true
+        "action_type": 1
+      },
+      {
+        "title": "This is a primary list group item",
+        "action": true,
+        "icon": "bi-car-front",
+        "labelColor": "primary",
+        "description": "This is a primary list group item This is a primary list group item",
+        "sub_description": "This is a primary list group item",
+        "disabled": true,
+        "action_type": 1
       }
     ]
   },
@@ -30,16 +30,15 @@
         "title": "This is a primary list group item",
         "action": true,
         "avatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&s",
-        "icon": "bi-car-front",
         "labelColor": "primary",
         "description": "This is a primary list group item This is a primary list group item",
-        "sub_description": "This is a primary list group item"
+        "sub_description": "This is a primary list group item",
+        "action_type": 2
       },
       {
         "title": "This is a primary list group item",
         "action": true,
         "avatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&s",
-        "icon": "bi-car-front",
         "labelColor": "primary",
         "description": "This is a primary list group item This is a primary list group item",
         "sub_description": "This is a primary list group item"

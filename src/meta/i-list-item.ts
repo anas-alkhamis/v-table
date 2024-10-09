@@ -1,3 +1,4 @@
+
 export interface IListItem {
   title: string;
   action?: boolean;
@@ -7,4 +8,5 @@ export interface IListItem {
   sub_description?: string;
   icon?: string;
   disabled?: boolean;
+  action_type?: number;
 }

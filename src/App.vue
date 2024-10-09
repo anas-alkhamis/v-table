@@ -34,20 +34,25 @@
     ></v-pagination>
   </div>
   <!-- V List  Item start -->
-  <v-list-item :item="item">
-    <template #avatar="{ item }">
-      <img class="rounded-circle" width="100%" :src="item.avatar" />
-    </template>
-    <template #description="{ item }">
-      <p class="m-0 small">{{ item.description }}</p>
-    </template>
-    <template #sub-description="{ item }">
-      <p class="m-0 small">{{ item.sub_description }}</p>
-    </template>
-    <template #action="{ item }">
-      <img class="w-100 h-100" :src="item.actionIcon" alt="" />
-    </template>
-  </v-list-item>
+  <div class="w-50 m-auto mt-5">
+    <v-list-item :item="item">
+      <template #icon="{ item }">
+        <img class="rounded-circle" width="100%" :src="item.icon" />
+      </template>
+      <template #avatar="{ item }">
+        <img class="rounded-circle" width="100%" :src="item.avatar" />
+      </template>
+      <template #description="{ item }">
+        <p class="m-0 small">{{ item.description }}</p>
+      </template>
+      <template #sub-description="{ item }">
+        <p class="m-0 small">{{ item.sub_description }}</p>
+      </template>
+      <template #action="{ item }">
+        <img class="w-100 h-100" :src="item.actionIcon" alt="" />
+      </template>
+    </v-list-item>
+  </div>
   <!-- V List  Item end -->
 </template>
 <script setup lang="ts">
@@ -65,10 +70,11 @@ const item = {
   title: "This is a primary list group item",
   actionIcon:
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&s",
-  avatar:
+    icon:
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&s",
   labelColor: "primary",
-  description: "This is a primary list group item This is a primary list group item",
+  description:
+    "This is a primary list group item This is a primary list group item",
   sub_description: "This is a primary list group item",
 };
 const schema1: ISchema = {

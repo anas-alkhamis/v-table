@@ -1,5 +1,7 @@
 <template>
-  <i :class="props.icon" class="icon m-1"></i>
+  <button>
+    <i :class="props.icon" class="icon m-1"></i>
+  </button>
 </template>
 
 <script setup lang="ts">

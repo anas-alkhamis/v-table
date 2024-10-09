@@ -33,160 +33,45 @@
       :withInput="true"
     ></v-pagination>
   </div>
-  <!-- V List  Item start -->
+  <
+  <!-- V List View Items  -->
   <div class="w-50 m-auto mt-5">
-    <v-list-item :item="item">
-      <template #icon="{ item }">
-        <img class="rounded-circle" width="100%" :src="item.icon" />
+    <v-list-view :listGroup="listGroup">
+      <template #list-group="{ item }">
+        <v-list-group :item="item">
+          <template #list-item="{ item }">
+            <v-list-item :item="item">
+              <template #avatar="{ item }">
+                <img class="rounded-circle" width="100%" :src="item.avatar" />
+              </template>
+              <template #description="{ item }">
+                <p class="m-0 fs-6 fw-lighter">{{ item.description }}</p>
+              </template>
+              <template #sub-description="{ item }">
+                <p class="m-0 fs-6 fw-lighter">{{ item.sub_description }}</p>
+              </template>
+              <template #action>
+                <v-checkbox></v-checkbox>
+              </template>
+            </v-list-item>
+          </template>
+        </v-list-group>
       </template>
-      <template #avatar="{ item }">
-        <img class="rounded-circle" width="100%" :src="item.avatar" />
-      </template>
-      <template #description="{ item }">
-        <p class="m-0 small">{{ item.description }}</p>
-      </template>
-      <template #sub-description="{ item }">
-        <p class="m-0 small">{{ item.sub_description }}</p>
-      </template>
-      <template #action="{ item }">
-        <img class="w-100 h-100" :src="item.actionIcon" alt="" />
-      </template>
-    </v-list-item>
+    </v-list-view>
   </div>
-  <!-- V List  Item end -->
 </template>
 <script setup lang="ts">
 import data1 from "./assets/MOCK_DATA(1).json";
+import listGroup from "./assets/MOCK_DATA_LIST_VIEW.json";
+import { schema1 } from "./schema/table-schema";
 import { defineAsyncComponent, ref, watch } from "vue";
-import { ISchema } from "./meta/i-table";
 
 const currentPage = ref(1);
 const searchValue = ref("");
 const dataTable = ref<{ [key: string]: string }[]>(data1);
 const rowsPerPage = 10;
 const totalRows = ref(dataTable.value.length);
-// v-list-item data
-const item = {
-  title: "This is a primary list group item",
-  actionIcon:
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&s",
-    icon:
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&s",
-  labelColor: "primary",
-  description:
-    "This is a primary list group item This is a primary list group item",
-  sub_description: "This is a primary list group item",
-};
-const schema1: ISchema = {
-  searchableColumns: ["car_make", "car_model_year"],
-  columns: [
-    {
-      name: "checkbox",
-      displayName: "ID",
-      displaySlot: "checkbox",
-      slotName: "checkbox",
-    },
-    {
-      name: "id",
-      displayName: "ID",
-    },
-    {
-      name: "car_make",
-      displayName: "Car Make",
-      slotName: "car",
-    },
-    {
-      name: "car_model_year",
-      displayName: "Car Model Year",
-    },
-    {
-      name: "car_vin",
-      displayName: "Car VIN",
-    },
-    {
-      name: "action",
-      slotName: "action",
-      displayName: "Action",
-    },
-  ],
-};
-const schema2: ISchema = {
-  searchableColumns: [],
-  columns: [
-    {
-      name: "id",
-      displayName: "ID",
-    },
-    {
-      name: "fullname.fName",
-      displayName: "First Name",
-    },
-    {
-      name: "fullname.lName",
-      displayName: "Last Name",
-    },
-    {
-      name: "email",
-      displayName: "Email",
-    },
-    {
-      name: "car.make",
-      displayName: "Car Make",
-    },
-    {
-      name: "car.model",
-      displayName: "Car Model",
-    },
-    {
-      name: "car.year",
-      displayName: "Car Year",
-    },
-    {
-      name: "address.street",
-      displayName: "Street Address",
-    },
-    {
-      name: "address.city",
-      displayName: "City",
-    },
-    {
-      name: "address.state",
-      displayName: "State",
-    },
-    {
-      name: "address.zip.code",
-      displayName: "ZIP Code",
-    },
-  ],
-};
-const schema3: ISchema = {
-  columns: [
-    {
-      name: "id",
-      displayName: "ID",
-    },
-    {
-      name: "first_name",
-      displayName: "First Name",
-    },
-    {
-      name: "last_name",
-      displayName: "Last Name",
-    },
-    {
-      name: "email",
-      displayName: "Email",
-    },
-    {
-      name: "gender",
-      displayName: "Gender",
-    },
-    {
-      name: "ip_address",
-      displayName: "IP Address",
-    },
-  ],
-};
+
 const changePage = (page: number) => {
   currentPage.value = page;
 };
@@ -224,5 +109,11 @@ const VSearch = defineAsyncComponent(
 );
 const VListItem = defineAsyncComponent(
   () => import("./components/v-list-item/v-list-item.vue")
+);
+const VListGroup = defineAsyncComponent(
+  () => import("./components/v-list-group/v-list-group.vue")
+);
+const VListView = defineAsyncComponent(
+  () => import("./components/v-list-view/v-list-view.vue")
 );
 </script>

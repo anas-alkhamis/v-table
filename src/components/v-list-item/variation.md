@@ -6,15 +6,28 @@
 
 ```js
 interface IListItem {
+  title: string;
+  actionIcon?: string;
+  avatar?: string;
+  labelColor?: string;
+  description?: string;
+  sub_description?: string;
+  icon?: string;
+}
+interface IListItemProps {
+  item: IListItem;
+}
+interface IListGroupProps {
   item: {
-    title: string,
-    actionIcon?: string,
-    avatar?: string,
-    labelColor?: string,
-    description?: string,
-    sub_description?: string,
-    icon?: string,
+    list: IListItem[],
+    header: string,
   };
+}
+interface IListViewProps {
+  listGroup: {
+    list: IListItem[],
+    header: string,
+  }[];
 }
 ```
 
@@ -44,8 +57,18 @@ interface IListItem {
 
   ![image](../../assets/variation/images/list-item-6.png)
 
+- list view group of items with list header
+
+  ![image](../../assets/variation/images/list-item-7.png)
+
+- disabled list item
+
+  ![image](../../assets/variation/images/list-item-8.png)
+
 ## How v-list-item works
 
 the list item component is responsible for item ui.
 takes a props as obj with title required.
-other object values are optional, there are slot tags for `icon` `avatar` `description` `sub-description` and `action`, and they will be activated if the obj contains the key representing the slot
+other object values are optional, there are slot tags for `icon` `avatar` `description` `sub-description` and `action`, and they will be activated if the obj contains the key representing the slot.
+
+list view and list group components are responsible of display multiple list item UI

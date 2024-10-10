@@ -8,7 +8,11 @@
             style="font-size: 14px"
             v-for="item in schema.columns"
           >
-            <slot v-if="item.displaySlot" :name="item.displaySlot" :item="item">
+            <slot
+              v-if="item.displaySlot"
+              :name="item.displaySlot"
+              :item="{ item, dataList: paginatedTableData }"
+            >
             </slot>
             <span v-else>
               {{ item.displayName }}

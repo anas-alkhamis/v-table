@@ -72,3 +72,30 @@ takes a props as obj with title required.
 other object values are optional, there are slot tags for `icon` `avatar` `description` `sub-description` and `action`, and they will be activated if the obj contains the key representing the slot.
 
 list view and list group components are responsible of display multiple list item UI
+
+## How v-list-item action works
+
+by passing a component vue tag as an `action` slot, and determining which action vue component should appear in the list item using enum and collection of vue components as shown below
+
+```js
+
+
+   <template #action="{ item }">
+      <component
+        v-if="item?.action"
+        :item="item"
+        :is="listItemActions[item?.action]"
+      ></component>
+    </template>
+    <script>
+    enum ListItemAction {
+      VCheckbox = 1,
+      VCRadio = 2,
+    }
+
+    const listItemActions: { [key: string]: ComponentOptionsMixin } = {
+      [ListItemAction.VCheckbox]: VCheckbox,
+      [ListItemAction.VCRadio]: VRadio,
+    };
+    </script>
+```

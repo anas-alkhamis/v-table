@@ -41,7 +41,6 @@
       :withInput="true"
     ></v-pagination>
   </div>
-  {{ tableSelectedRows }}
   <!-- V List View Items  -->
   <div class="w-50 m-auto mt-5">
     <v-list-view :listGroup="listGroup">

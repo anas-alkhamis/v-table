@@ -36,16 +36,16 @@
   <
   <!-- V List View Items  -->
   <div class="w-50 m-auto mt-5">
-    <v-list-view :listGroup="listGroup">
+    <v-list-view :listGroup="listGroup as any">
       <template #list-group="{ item }">
         <v-list-group :item="item">
           <template #list-item="{ item }">
             <v-list-item :item="item">
               <template #action="{ item }">
                 <component
-                  v-if="item?.action_type"
+                  v-if="item?.action"
                   :item="item"
-                  :is="listItemActions[item?.action_type]"
+                  :is="listItemActions[item?.action]"
                 ></component>
               </template>
             </v-list-item>
@@ -58,7 +58,7 @@
 <script setup lang="ts">
 import data1 from "./assets/MOCK_DATA(1).json";
 import listGroup from "./assets/MOCK_DATA_LIST_VIEW.json";
-import { ListItemAction } from "./meta/list-item-action";
+import { ListItemAction } from "./meta/enums/list-item-action";
 import { schema1 } from "./schema/table-schema";
 import { ComponentOptionsMixin, defineAsyncComponent, ref, watch } from "vue";
 

@@ -4,22 +4,20 @@
     "list": [
       {
         "title": "This is a primary list group item",
-        "action": true,
+        "action": 1,
         "icon": "bi-car-front",
         "labelColor": "primary",
         "description": "This is a primary list group item This is a primary list group item",
-        "sub_description": "This is a primary list group item",
-        "action_type": 1
+        "sub_description": "This is a primary list group item"
       },
       {
         "title": "This is a primary list group item",
-        "action": true,
+        "action": 1,
         "icon": "bi-car-front",
         "labelColor": "primary",
         "description": "This is a primary list group item This is a primary list group item",
         "sub_description": "This is a primary list group item",
-        "disabled": true,
-        "action_type": 1
+        "disabled": true
       }
     ]
   },
@@ -28,16 +26,15 @@
     "list": [
       {
         "title": "This is a primary list group item",
-        "action": true,
+        "action": 2,
         "avatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&s",
         "labelColor": "primary",
         "description": "This is a primary list group item This is a primary list group item",
-        "sub_description": "This is a primary list group item",
-        "action_type": 2
+        "sub_description": "This is a primary list group item"
       },
       {
         "title": "This is a primary list group item",
-        "action": true,
+        "action": null,
         "avatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&s",
         "labelColor": "primary",
         "description": "This is a primary list group item This is a primary list group item",

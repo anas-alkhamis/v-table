@@ -36,8 +36,8 @@
   <
   <!-- V List View Items  -->
   <div class="w-50 m-auto mt-5">
-    <v-list-view :listGroup="listGroup as any">
-      <template #list-group="{ item }">
+    <v-list-view :listGroup="listGroup">
+      <template #list-group="{item}">
         <v-list-group :item="item">
           <template #list-item="{ item }">
             <v-list-item :item="item">

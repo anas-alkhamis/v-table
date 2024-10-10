@@ -22,7 +22,15 @@
         <v-icon-button icon="bi bi-car-front"></v-icon-button>
         {{ item.car_make }}
       </template>
-      <template #checkbox="{ item }"> <v-checkbox :item="item" /> </template>
+      <template #checkbox="{ item }">
+        <v-table-row-selection :item="item" v-model="tableSelectedRows" />
+      </template>
+      <template #headerCheckbox="{ item }">
+        <v-table-bulk-selection
+          :dataList="item.dataList"
+          v-model="tableSelectedRows"
+        />
+      </template>
     </v-table>
     <v-pagination
       v-if="totalRows > rowsPerPage"
@@ -33,11 +41,11 @@
       :withInput="true"
     ></v-pagination>
   </div>
-  <
+  {{ tableSelectedRows }}
   <!-- V List View Items  -->
   <div class="w-50 m-auto mt-5">
     <v-list-view :listGroup="listGroup">
-      <template #list-group="{item}">
+      <template #list-group="{ item }">
         <v-list-group :item="item">
           <template #list-item="{ item }">
             <v-list-item :item="item">
@@ -64,6 +72,7 @@ import { ComponentOptionsMixin, defineAsyncComponent, ref, watch } from "vue";
 
 const currentPage = ref(1);
 const searchValue = ref("");
+const tableSelectedRows = ref<{ [key: string]: any }>({});
 const dataTable = ref<{ [key: string]: string }[]>(data1);
 const rowsPerPage = 10;
 const totalRows = ref(dataTable.value.length);
@@ -71,6 +80,7 @@ const totalRows = ref(dataTable.value.length);
 const changePage = (page: number) => {
   currentPage.value = page;
 };
+
 watch(searchValue, (to: string) => {
   if (!to?.trim().length || !schema1?.searchableColumns?.length) {
     dataTable.value = data1;
@@ -115,6 +125,17 @@ const VListGroup = defineAsyncComponent(
 const VListView = defineAsyncComponent(
   () => import("./components/v-list-view/v-list-view.vue")
 );
+const VTableBulkSelection = defineAsyncComponent(() =>
+  import("./components//v-table/components").then(
+    (module) => module.VTableBulkSelection
+  )
+);
+const VTableRowSelection = defineAsyncComponent(() =>
+  import("./components//v-table/components").then(
+    (module) => module.VTableRowSelection
+  )
+);
+
 const listItemActions: { [key: string]: ComponentOptionsMixin } = {
   [ListItemAction.VCheckbox]: VCheckbox,
   [ListItemAction.VCRadio]: VRadio,

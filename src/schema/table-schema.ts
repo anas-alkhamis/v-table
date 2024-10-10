@@ -6,7 +6,7 @@ export const schema1: ISchema = {
     {
       name: "checkbox",
       displayName: "ID",
-      displaySlot: "checkbox",
+      displaySlot: "headerCheckbox",
       slotName: "checkbox",
     },
     {

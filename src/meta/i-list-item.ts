@@ -1,7 +1,6 @@
-
 export interface IListItem {
   title: string;
-  action?: number;
+  action?: number | null;
   avatar?: string;
   labelColor?: string;
   description?: string;

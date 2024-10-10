@@ -93,6 +93,7 @@ watch(searchValue, (to: string) => {
     });
     totalRows.value = dataTable.value.length;
   }
+  currentPage.value = 1;
 });
 const VTable = defineAsyncComponent(
   () => import("./components/v-table/v-table.vue")

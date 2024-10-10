@@ -39,7 +39,7 @@
       :totalRows="totalRows"
       @update="changePage"
       :withInput="true"
-    ></v-pagination>
+    />
   </div>
   <!-- V List View Items  -->
   <div class="w-50 m-auto mt-5">
@@ -53,7 +53,7 @@
                   v-if="item?.action"
                   :item="item"
                   :is="listItemActions[item?.action]"
-                ></component>
+                />
               </template>
             </v-list-item>
           </template>

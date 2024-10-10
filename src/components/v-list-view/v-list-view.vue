@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container card py-4">
     <div v-for="item in props.listGroup">
       <slot name="list-group" :item="item"></slot>
     </div>

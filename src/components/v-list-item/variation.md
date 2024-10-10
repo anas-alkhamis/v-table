@@ -7,12 +7,13 @@
 ```js
 interface IListItem {
   title: string;
-  actionIcon?: string;
+  action?: number | null;
   avatar?: string;
   labelColor?: string;
   description?: string;
   sub_description?: string;
   icon?: string;
+  disabled?: boolean;
 }
 interface IListItemProps {
   item: IListItem;
@@ -78,8 +79,6 @@ list view and list group components are responsible of display multiple list ite
 by passing a component vue tag as an `action` slot, and determining which action vue component should appear in the list item using enum and collection of vue components as shown below
 
 ```js
-
-
    <template #action="{ item }">
       <component
         v-if="item?.action"
@@ -88,6 +87,7 @@ by passing a component vue tag as an `action` slot, and determining which action
       ></component>
     </template>
     <script>
+
     enum ListItemAction {
       VCheckbox = 1,
       VCRadio = 2,
